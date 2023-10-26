@@ -24,10 +24,12 @@ public class PlayScreen implements Screen {
     private FitViewport gamePort;
     private Hud hud;
 
+    //Tiled map
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
-    private AssetManager assetManager;
+
+
 
     public PlayScreen(RedMan2D game){
         this.game = game;
@@ -37,19 +39,11 @@ public class PlayScreen implements Screen {
 
         //Note if you load your TMX map directly, you are responsible for calling TiledMap#dispose() once you no longer need it. This call will dispose of any textures loaded for the map.
         mapLoader = new TmxMapLoader();
-        /*
-        assetManager = new AssetManager();
 
-        assetManager.setLoader(TiledMap.class, mapLoader);
-        assetManager.load("level1.tmx", TiledMap.class);
-        assetManager.finishLoading();
-
-        map = assetManager.get("level1.tmx", TiledMap.class);
-
-         */
         map = mapLoader.load("level1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
+
     }
     @Override
     public void show() {

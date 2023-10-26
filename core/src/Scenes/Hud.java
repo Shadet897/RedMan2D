@@ -11,13 +11,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.RedMan2D;
 
+import java.sql.Time;
+
 public class Hud {
     public Stage stage;
     private Viewport viewport;
 
     private Integer worldTimer;
     private float timeCount;
-    private  Integer score;
+    private Integer score;
 
     Label countdownLabel;
     Label scoreLabel;
