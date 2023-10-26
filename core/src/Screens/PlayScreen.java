@@ -2,6 +2,7 @@ package Screens;
 
 import Scenes.Hud;
 import Sprites.RedManCharakter;
+import Tools.B2WorldCreator;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -27,6 +29,9 @@ import javax.swing.*;
 
 public class PlayScreen implements Screen {
     private RedMan2D game;
+    private TextureAtlas atlas;
+
+
     private OrthographicCamera gamecam;
     private FitViewport gamePort;
     private Hud hud;
@@ -44,6 +49,8 @@ public class PlayScreen implements Screen {
     private RedManCharakter player;
 
     public PlayScreen(RedMan2D game){
+
+        atlas = new TextureAtlas("RedMan2DPrototype.pack");
         this.game = game;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(RedMan2D.V_WIDTH / RedMan2D.PPM, RedMan2D.V_HEIGHT / RedMan2D.PPM, gamecam);
@@ -58,53 +65,15 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
 
-        BodyDef bdef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fdef = new FixtureDef();
-        Body body;
+        new B2WorldCreator(world, map);
 
-        player = new RedManCharakter(world);
-        //create ground
-        for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / RedMan2D.PPM, (rect.getY() + rect.getHeight() / 2)/ RedMan2D.PPM) ;
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth() / 2 / RedMan2D.PPM, rect.getHeight() / 2 / RedMan2D.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-        //create coins
-        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / RedMan2D.PPM, (rect.getY() + rect.getHeight() / 2)/ RedMan2D.PPM) ;
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth() / 2 / RedMan2D.PPM, rect.getHeight() / 2 / RedMan2D.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-        //create endFlag
-        for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / RedMan2D.PPM, (rect.getY() + rect.getHeight() / 2)/ RedMan2D.PPM) ;
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth() / 2 / RedMan2D.PPM, rect.getHeight() / 2 / RedMan2D.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-
+        player = new RedManCharakter(world, this);
     }
+
+    public TextureAtlas getAtlas(){
+        return atlas;
+    }
+
     @Override
     public void show() {
 
@@ -127,23 +96,34 @@ public class PlayScreen implements Screen {
 
         world.step(1/60f, 6, 2);
 
+        player.update(dt);
+
         gamecam.position.x = player.b2body.getPosition().x;
 
         gamecam.update();
 
+
         renderer.setView(gamecam);
     }
 
-    @Override
     public void render(float delta) {
         update(delta);
-        Gdx.gl.glClearColor(0, 0, 0 , 0);
+        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         renderer.render();
 
-        //render box2ddebuglines
+        // Render box2d debug lines
         b2dr.render(world, gamecam.combined);
+
+        game.batch.setProjectionMatrix(gamecam.combined); // Set the projection matrix here
+
+        game.batch.begin();
+        float playerWidth = player.redManStanding.getWidth() / game.PPM;
+        float playerHeight = player.redManStanding.getHeight() / game.PPM;
+        float playerX = player.b2body.getPosition().x - (playerWidth / 2);
+        float playerY = player.b2body.getPosition().y - (playerHeight / 2);
+        game.batch.draw(player.redManStanding, playerX, playerY, playerWidth, playerHeight);
+        game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
@@ -171,6 +151,10 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        map.dispose();
+        renderer.dispose();
+        world.dispose();
+        b2dr.dispose();
+        hud.dispose();
     }
 }
