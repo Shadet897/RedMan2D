@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -30,13 +31,16 @@ public class PlayScreen implements Screen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
+    //Box 2d
+    private World world;
+    private Box2DDebugRenderer b2dr;
+
     public PlayScreen(RedMan2D game){
         this.game = game;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(RedMan2D.V_WIDTH, RedMan2D.V_HEIGHT, gamecam);
         this.hud = new Hud(game.batch);
 
-        //Note if you load your TMX map directly, you are responsible for calling TiledMap#dispose() once you no longer need it. This call will dispose of any textures loaded for the map.
         mapLoader = new TmxMapLoader();
 
         map = mapLoader.load("level1.tmx");
