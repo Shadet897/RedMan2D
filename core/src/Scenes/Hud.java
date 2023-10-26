@@ -57,5 +57,4 @@ public class Hud {
 
         stage.addActor(table);
     }
-
 }
