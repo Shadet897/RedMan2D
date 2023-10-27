@@ -1,9 +1,8 @@
 package Sprites;
 
-import Screens.PlayScreen;
+import Screens.Level1;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.RedMan2D;
 
@@ -13,7 +12,7 @@ public class RedManCharakter extends Sprite {
     public  Texture redManStanding;
     //private TextureRegion redmanStand;
 
-    public RedManCharakter(World world, PlayScreen screen){
+    public RedManCharakter(World world, Level1 screen){
         //super(screen.getAtlas().findRegion("little_mario"));
         redManStanding = new Texture("RedManStanding.png");
         this.world = world;

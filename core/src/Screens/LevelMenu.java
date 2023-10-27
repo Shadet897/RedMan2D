@@ -66,7 +66,7 @@ public class LevelMenu implements Screen {
         level1Button.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((RedMan2D)Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game));
+                ((RedMan2D)Gdx.app.getApplicationListener()).setScreen(new Level1(game));
             }
         });
         closeButton.addListener(new ClickListener(){
@@ -125,6 +125,7 @@ public class LevelMenu implements Screen {
 
     @Override
     public void dispose() {
-
+        atlas.dispose();
+        batch.dispose();
     }
 }

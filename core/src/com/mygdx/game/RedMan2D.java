@@ -1,14 +1,9 @@
 package com.mygdx.game;
 
 import Screens.MainMenu;
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
-import Screens.PlayScreen;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class RedMan2D extends Game {
 	public static final int V_WIDTH = 400;
