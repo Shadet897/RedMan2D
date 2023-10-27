@@ -1,8 +1,8 @@
 package Sprites;
 
-import Screens.Level1;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.RedMan2D;
 
@@ -10,16 +10,11 @@ public class RedManCharakter extends Sprite {
     public World world;
     public Body b2body;
     public  Texture redManStanding;
-    //private TextureRegion redmanStand;
 
-    public RedManCharakter(World world, Level1 screen){
-        //super(screen.getAtlas().findRegion("little_mario"));
+    public RedManCharakter(World world){
         redManStanding = new Texture("RedManStanding.png");
         this.world = world;
         defineMario();
-        //redmanStand = new TextureRegion(getTexture(), 0, 0, 16, 16);
-        //setBounds(0, 0, 16 / RedMan2D.PPM, 16 / RedMan2D.PPM);
-        //setRegion(redmanStand);
     }
 
     public void update(float dt){
@@ -33,10 +28,19 @@ public class RedManCharakter extends Sprite {
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(7 / RedMan2D.PPM);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(6 /  RedMan2D.PPM, 6 / RedMan2D.PPM);
+        fdef.filter.categoryBits = RedMan2D.REDMAN_BIT;
+        fdef.filter.maskBits = RedMan2D.DEFAULT_BIT | RedMan2D.COIN_BIT | RedMan2D.BRICK_BIT | RedMan2D.ENDFLAG_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
+
+        EdgeShape head = new EdgeShape();
+        head.set(new Vector2(-4 / RedMan2D.PPM, 6 / RedMan2D.PPM), new Vector2(4 / RedMan2D.PPM, 6 / RedMan2D.PPM));
+        fdef.shape = head;
+        fdef.isSensor = true;
+
+        b2body.createFixture(fdef).setUserData("head");
     }
 }

@@ -2,9 +2,10 @@ package Screens;
 
 import Scenes.Hud;
 import Sprites.RedManCharakter;
+import Sprites.RedManMovement;
 import Tools.B2WorldCreator;
+import Tools.WorldContactListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -46,18 +47,20 @@ public class Level1 implements Screen {
         this.hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
-
+        //cam,map,renderer
         map = mapLoader.load("level1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map,1 / RedMan2D.PPM);
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
-
+        //world debug tool
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
-
-        new B2WorldCreator(world, map);
-
-        player = new RedManCharakter(world, this);
+        //create map
+        new B2WorldCreator(world, map, hud);
+        //character and movement
+        player = new RedManCharakter(world);
         this.movement = new RedManMovement(game, player);
+
+        world.setContactListener(new WorldContactListener());
     }
 
     public TextureAtlas getAtlas(){
@@ -75,6 +78,7 @@ public class Level1 implements Screen {
         world.step(1/60f, 6, 2);
 
         player.update(dt);
+        hud.update(dt);
 
         if(player.b2body.getPosition().x < 201 / game.PPM){
             gamecam.position.x = 201 / game.PPM;

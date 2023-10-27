@@ -1,5 +1,7 @@
 package Tools;
 
+import Scenes.Hud;
+import Sprites.Brick;
 import Sprites.Coin;
 import Sprites.EndFlag;
 import com.badlogic.gdx.maps.MapObject;
@@ -10,12 +12,13 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.RedMan2D;
 
 public class B2WorldCreator {
-    public B2WorldCreator(World world, TiledMap map){
+    public B2WorldCreator(World world, TiledMap map, Hud hud){
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
         Body body;
+
 
         //create ground
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
@@ -34,13 +37,19 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            new Coin(world, map, rect);
+            new Coin(world, map, rect, hud);
+        }
+        //create bricks
+        for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            new Brick(world, map, rect, hud);
 
         }
         //create endFlag
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new EndFlag(world, map, rect);
+            new EndFlag(world, map, rect, hud);
         }
     }
 }
