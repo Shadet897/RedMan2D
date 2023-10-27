@@ -23,6 +23,5 @@
  </objectgroup>
  <objectgroup id="5" name="EndFlag">
   <object id="12" x="272" y="128" width="16" height="16"/>
-  <object id="13" x="82.6667" y="-106.667"/>
  </objectgroup>
 </map>

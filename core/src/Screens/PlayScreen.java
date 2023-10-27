@@ -98,10 +98,13 @@ public class PlayScreen implements Screen {
 
         player.update(dt);
 
-        gamecam.position.x = player.b2body.getPosition().x;
-
-        gamecam.update();
-
+        if(player.b2body.getPosition().x < 201 / game.PPM){
+            gamecam.position.x = 201 / game.PPM;
+        }
+        else {
+            gamecam.position.x = player.b2body.getPosition().x;
+            gamecam.update();
+        }
 
         renderer.setView(gamecam);
     }
