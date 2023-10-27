@@ -1,4 +1,4 @@
-package Screens;
+package Menus;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.RedMan2D;
-import jdk.tools.jmod.Main;
 
 public class MainMenu implements Screen {
     private RedMan2D game;
@@ -64,7 +63,8 @@ public class MainMenu implements Screen {
         levelsButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((RedMan2D)Gdx.app.getApplicationListener()).setScreen(new LevelMenu(game));
+                dispose();
+                ((RedMan2D)Gdx.app.getApplicationListener()).setScreen(new LevelMenuWorld1(game));
             }
         });
         exitButton.addListener(new ClickListener(){
@@ -128,5 +128,6 @@ public class MainMenu implements Screen {
     public void dispose() {
         skin.dispose();
         atlas.dispose();
+        stage.dispose();
     }
 }

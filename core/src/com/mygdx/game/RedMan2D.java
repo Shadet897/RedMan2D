@@ -1,6 +1,6 @@
 package com.mygdx.game;
 
-import Screens.MainMenu;
+import Menus.MainMenu;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Game;

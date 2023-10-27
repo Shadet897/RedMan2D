@@ -21,6 +21,8 @@ public class Hud implements Disposable {
     private Integer worldTimer;
     private float timeCount;
     private Integer score;
+    private Integer world;
+    private Integer level;
 
     Label countdownLabel;
     Label scoreLabel;
@@ -29,7 +31,9 @@ public class Hud implements Disposable {
     Label worldLabel;
     Label redManLabel;
 
-    public Hud(SpriteBatch sb){
+    public Hud(SpriteBatch sb, Integer world, Integer level){
+        this.world = world;
+        this.level = level;
         worldTimer = 300;
         timeCount = 0;
         score = 0;
@@ -44,7 +48,7 @@ public class Hud implements Disposable {
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levelLabel = new Label(worldLevelToString(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         redManLabel = new Label("REDMAN", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
@@ -66,6 +70,10 @@ public class Hud implements Disposable {
             countdownLabel.setText(String.format("%03d", worldTimer));
             timeCount = 0;
         }
+    }
+
+    public String worldLevelToString(){
+        return world + "-" + level;
     }
 
     public void addScore(int value){
