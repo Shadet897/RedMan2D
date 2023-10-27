@@ -69,6 +69,12 @@ public class LevelMenu implements Screen {
                 ((RedMan2D)Gdx.app.getApplicationListener()).setScreen(new Level1(game));
             }
         });
+        level2Button.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((RedMan2D)Gdx.app.getApplicationListener()).setScreen(new Level2(game));
+            }
+        });
         closeButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
