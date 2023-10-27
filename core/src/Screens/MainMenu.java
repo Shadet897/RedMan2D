@@ -54,17 +54,17 @@ public class MainMenu implements Screen {
         mainTable.top();
 
         //Buttons
-        TextButton playButton = new TextButton("PLAY", skin);
+        TextButton levelsButton = new TextButton("Levels", skin);
         TextButton optionsButton = new TextButton("Options", skin);
         TextButton exitButton = new TextButton("Exit", skin);
 
         //label
         Label redmanText = new Label("REDMAN",new Label.LabelStyle(new BitmapFont(), Color.WHITE) );
 
-        playButton.addListener(new ClickListener(){
+        levelsButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((RedMan2D)Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game));
+                ((RedMan2D)Gdx.app.getApplicationListener()).setScreen(new LevelMenu(game));
             }
         });
         exitButton.addListener(new ClickListener(){
@@ -80,7 +80,7 @@ public class MainMenu implements Screen {
         mainTable.row().padTop(50);
         mainTable.pad(viewport.getWorldHeight() / 4);
 
-        mainTable.add(playButton);
+        mainTable.add(levelsButton);
         mainTable.row().padTop(10);
         mainTable.row();
         mainTable.add(optionsButton);
