@@ -2,6 +2,7 @@ package Menus;
 
 import Screens.Level1;
 import Screens.Level2;
+import Screens.Level3;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -75,6 +76,13 @@ public class LevelMenuWorld1 implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 dispose();
                 ((RedMan2D)Gdx.app.getApplicationListener()).setScreen(new Level2(game));
+            }
+        });
+        level3Button.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                ((RedMan2D)Gdx.app.getApplicationListener()).setScreen(new Level3(game));
             }
         });
         closeButton.addListener(new ClickListener(){
