@@ -12,6 +12,7 @@ public class Coin extends InteractiveTileObject{
     private Hud hud;
     private static TiledMapTileSet tileSet;
     private final int BLANK_COIN = 6;
+    private final int COIN_BLOCK = 31;
 
     public Coin(World world, TiledMap map, Rectangle bounds, Hud hud){
         super(world, map, bounds, hud);
@@ -24,7 +25,9 @@ public class Coin extends InteractiveTileObject{
     @Override
     public void interactionWithObject() {
         Gdx.app.log("hitting coin", "");
-        getCell().setTile(tileSet.getTile(BLANK_COIN));
-        hud.addScore(200);
+        if (getCell().getTile().equals(tileSet.getTile(COIN_BLOCK))){
+            hud.addScore(200);
+            getCell().setTile(tileSet.getTile(BLANK_COIN));
+        }
     }
 }
