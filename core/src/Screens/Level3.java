@@ -46,7 +46,7 @@ public class Level3 implements Screen {
         this.game = game;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(RedMan2D.V_WIDTH / RedMan2D.PPM, RedMan2D.V_HEIGHT / RedMan2D.PPM, gamecam);
-        this.hud = new Hud(game.batch, 1, 2);
+        this.hud = new Hud(game.batch, 1, 3);
 
         mapLoader = new TmxMapLoader();
         //cam,map,renderer
