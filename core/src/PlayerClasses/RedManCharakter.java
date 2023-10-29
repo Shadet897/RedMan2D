@@ -1,4 +1,4 @@
-package Sprites;
+package PlayerClasses;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -9,7 +9,8 @@ import com.mygdx.game.RedMan2D;
 public class RedManCharakter extends Sprite {
     public World world;
     public Body b2body;
-    public  Texture redManStanding;
+    public Texture redManStanding;
+    public int atLevel;
 
     public RedManCharakter(World world){
         redManStanding = new Texture("RedManStanding.png");

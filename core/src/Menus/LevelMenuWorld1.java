@@ -54,9 +54,9 @@ public class LevelMenuWorld1 implements Screen {
 
         Table levelTable = new Table();
         //Buttons
-        TextButton level1Button = new TextButton("Level1", skin);
-        TextButton level2Button = new TextButton("Level2", skin);
-        TextButton level3Button = new TextButton("Level3", skin);
+        TextButton level1Button = new TextButton("Level 1", skin);
+        TextButton level2Button = new TextButton("Level 2", skin);
+        TextButton level3Button = new TextButton("Level 3", skin);
         TextButton closeButton = new TextButton("close", skin);
         TextButton forwardButton = new TextButton(">", skin);
 

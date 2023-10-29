@@ -1,7 +1,5 @@
 package Menus;
 
-import Screens.Level1;
-import Screens.Level2;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -54,9 +52,9 @@ public class LevelMenuWorld2 implements Screen {
 
         Table levelTable = new Table();
         //Buttons
-        TextButton level1Button = new TextButton("Level1", skin);
-        TextButton level2Button = new TextButton("Level2", skin);
-        TextButton level3Button = new TextButton("Level3", skin);
+        TextButton level1Button = new TextButton("Level 1", skin);
+        TextButton level2Button = new TextButton("Level 2", skin);
+        TextButton level3Button = new TextButton("Level 3", skin);
         TextButton closeButton = new TextButton("close", skin);
         TextButton backButton = new TextButton("<", skin);
         //label

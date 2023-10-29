@@ -1,8 +1,7 @@
 package Menus;
 
 import PlayerClasses.RedManCharakter;
-import Screens.Level1;
-import Screens.Level2;
+import Screens.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -19,7 +18,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.RedMan2D;
 
-public class DeathSceen implements Screen {
+public class LevelFinishedScreen implements Screen {
     private SpriteBatch batch;
     private TextureAtlas atlas;
     private Skin skin;
@@ -29,7 +28,7 @@ public class DeathSceen implements Screen {
     private RedManCharakter player;
     private RedMan2D game;
 
-    public DeathSceen(RedMan2D game, RedManCharakter player){
+    public LevelFinishedScreen(RedMan2D game, RedManCharakter player){
         this.game = game;
         this.player = player;
         atlas = new TextureAtlas("flat-earth-ui.atlas");
@@ -54,12 +53,12 @@ public class DeathSceen implements Screen {
         mainTable.setFillParent(true);
         mainTable.top();
 
-        Label gameOverLabel = new Label("Game Over!", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label levelFinishedLabel = new Label("Level Finished!", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         TextButton mainMenuButton = new TextButton("Main Menu", skin);
         TextButton restartLevelButton = new TextButton("Restart?", skin);
 
-        mainTable.add(gameOverLabel).colspan(2).padTop(viewport.getWorldHeight() / 8).row();
+        mainTable.add(levelFinishedLabel).colspan(2).padTop(viewport.getWorldHeight() / 8).row();
         mainTable.add(mainMenuButton).padTop(viewport.getWorldHeight() / 4).expandX();
         mainTable.add(restartLevelButton).padTop(viewport.getWorldHeight() / 4).expandX();
 
@@ -90,16 +89,16 @@ public class DeathSceen implements Screen {
                 return new Level2(game);
             }
             case 3: {
-                return null;
+                return new Level3(game);
             }
             case 4: {
-                return null;
+                return new Level4(game);
             }
             case 5: {
-                return null;
+                return new Level5(game);
             }
             case 6: {
-                return null;
+                return new Level6(game);
             }
         }
         return null;

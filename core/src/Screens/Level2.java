@@ -1,8 +1,9 @@
 package Screens;
 
+import PlayerClasses.RedManDeathCheck;
 import Scenes.Hud;
-import Sprites.RedManCharakter;
-import Sprites.RedManMovement;
+import PlayerClasses.RedManCharakter;
+import PlayerClasses.RedManMovement;
 import Tools.B2WorldCreator;
 import Tools.WorldContactListener;
 import com.badlogic.gdx.Gdx;
@@ -36,6 +37,8 @@ public class Level2 implements Screen {
     private RedManCharakter player;
     //movement
     private RedManMovement movement;
+    //Death
+    private RedManDeathCheck checkDeath;
 
     public Level2(RedMan2D game){
 
@@ -56,7 +59,9 @@ public class Level2 implements Screen {
         new B2WorldCreator(world, map, hud);
         //character and movement
         player = new RedManCharakter(world);
+        player.atLevel = 2;
         this.movement = new RedManMovement(game, player);
+        this.checkDeath = new RedManDeathCheck(game, player, hud);
 
         world.setContactListener(new WorldContactListener());
     }
@@ -72,6 +77,8 @@ public class Level2 implements Screen {
 
     public void update (float dt){
         movement.handleInput(dt);
+        checkDeath.checkDeathByFalling();
+        checkDeath.checkDeathByTimer();
 
         world.step(1/60f, 6, 2);
 

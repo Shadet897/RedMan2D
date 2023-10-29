@@ -19,7 +19,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.RedMan2D;
 
-public class Level1 implements Screen {
+public class Level5 implements Screen {
     private RedMan2D game;
     private TextureAtlas atlas;
 
@@ -40,17 +40,17 @@ public class Level1 implements Screen {
     //Death
     private RedManDeathCheck checkDeath;
 
-    public Level1(RedMan2D game){
+    public Level5(RedMan2D game){
 
         atlas = new TextureAtlas("RedMan2DPrototype.pack");
         this.game = game;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(RedMan2D.V_WIDTH / RedMan2D.PPM, RedMan2D.V_HEIGHT / RedMan2D.PPM, gamecam);
-        this.hud = new Hud(game.batch, 1, 1);
+        this.hud = new Hud(game.batch, 1, 2);
 
         mapLoader = new TmxMapLoader();
         //cam,map,renderer
-        map = mapLoader.load("level1.tmx");
+        map = mapLoader.load("level2.tmx");
         renderer = new OrthogonalTiledMapRenderer(map,1 / RedMan2D.PPM);
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
         //world debug tool
@@ -59,7 +59,7 @@ public class Level1 implements Screen {
         new B2WorldCreator(world, map, hud);
         //character and movement
         player = new RedManCharakter(world);
-        player.atLevel = 1;
+        player.atLevel = 2;
         this.movement = new RedManMovement(game, player);
         this.checkDeath = new RedManDeathCheck(game, player, hud);
 

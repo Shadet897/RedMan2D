@@ -1,9 +1,7 @@
-package Sprites;
+package PlayerClasses;
 
-import Sprites.RedManCharakter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.RedMan2D;
 

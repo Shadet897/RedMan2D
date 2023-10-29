@@ -34,7 +34,7 @@ public class Hud implements Disposable {
     public Hud(SpriteBatch sb, Integer world, Integer level){
         this.world = world;
         this.level = level;
-        worldTimer = 300;
+        worldTimer = 60;
         timeCount = 0;
         score = 0;
 
@@ -79,6 +79,10 @@ public class Hud implements Disposable {
     public void addScore(int value){
         score += value;
         scoreLabel.setText(String.format("%06d", score));
+    }
+
+    public Integer getWorldTimer() {
+        return worldTimer;
     }
 
     @Override
