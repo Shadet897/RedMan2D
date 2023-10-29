@@ -1,8 +1,7 @@
 package Menus;
 
 import PlayerClasses.RedManCharakter;
-import Screens.Level1;
-import Screens.Level2;
+import Screens.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -90,16 +89,16 @@ public class DeathSceen implements Screen {
                 return new Level2(game);
             }
             case 3: {
-                return null;
+                return new Level3(game);
             }
             case 4: {
-                return null;
+                return new Level4(game);
             }
             case 5: {
-                return null;
+                return new Level5(game);
             }
             case 6: {
-                return null;
+                return new Level6(game);
             }
         }
         return null;

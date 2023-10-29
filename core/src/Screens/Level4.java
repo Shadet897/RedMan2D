@@ -59,7 +59,7 @@ public class Level4 implements Screen {
         new B2WorldCreator(world, map, hud);
         //character and movement
         player = new RedManCharakter(world);
-        player.atLevel = 2;
+        player.atLevel = 4;
         this.movement = new RedManMovement(game, player);
         this.checkDeath = new RedManDeathCheck(game, player, hud);
 
